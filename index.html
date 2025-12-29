@@ -39,7 +39,6 @@ input, textarea{
     padding:4px;
     font-family:'VT323', monospace;
     font-size:18px;
-    width:100%;
 }
 
 .inline{
@@ -77,7 +76,7 @@ input, textarea{
     border:1px solid #3c4270;
     margin-bottom:6px;
 }
-.bar span{display:block;height:100%;}
+.bar span{display:block;height:100%;width:0;}
 .bar-for span{background:#ffb84b;}
 .bar-agi span{background:#4bff9a;}
 .bar-int span{background:#ffffff;}
@@ -99,9 +98,26 @@ input, textarea{
 .pericia{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     border-bottom:1px dotted #3c4270;
+    gap:8px;
 }
-.pericia input{width:60px;text-align:center;}
+
+.pericia .nome{
+    flex:1;
+}
+
+.pericia input{
+    width:60px;
+    text-align:center;
+}
+
+/* Desvantagem em vermelho no meio */
+.desvantagem{
+    color:#ff4b4b;
+    font-weight:bold;
+    white-space: nowrap;
+}
 
 textarea{
     min-height:140px;
@@ -137,12 +153,12 @@ textarea{
 <div class="section">
 <h2>Status</h2>
 <div class="status-grid">
-<div class="stat pv">PV<br><input type="number" data-save></div>
-<div class="stat for">FOR<br><input type="number" min="0" max="5" data-save data-bar="for"></div>
-<div class="stat int">INT<br><input type="number" min="0" max="5" data-save data-bar="int"></div>
-<div class="stat pe">PE<br><input type="number" data-save></div>
-<div class="stat agi">AGI<br><input type="number" min="0" max="5" data-save data-bar="agi"></div>
-<div class="stat pre">PRE<br><input type="number" min="0" max="5" data-save data-bar="pre"></div>
+  <div class="stat pv">❤️ PV<br><input type="number" min="0" max="999" data-save></div>
+  <div class="stat for">💪 FOR<br><input type="number" min="0" max="5" data-save data-bar="for"></div>
+  <div class="stat int">🧠 INT<br><input type="number" min="0" max="5" data-save data-bar="int"></div>
+  <div class="stat pe">🔋 PE<br><input type="number" min="0" max="999" data-save></div>
+  <div class="stat agi">🏃 AGI<br><input type="number" min="0" max="5" data-save data-bar="agi"></div>
+  <div class="stat pre">🎯 PRE<br><input type="number" min="0" max="5" data-save data-bar="pre"></div>
 </div>
 
 <h3>Distribuição de Atributos</h3>
@@ -173,43 +189,43 @@ textarea{
 <!-- FOR | AGI -->
 <div class="pericias-row">
 <div>
-<div class="pericia for">FORTITUDE (FOR)<input data-save></div>
-<div class="pericia for">LUTA (FOR)<input data-save></div>
-<div class="pericia for">ATLETISMO (FOR)<input data-save></div>
-<div class="pericia for">ARREMESSO (FOR)<input data-save></div>
-<div class="pericia for">TÁTICA (FOR)<input data-save></div>
+<div class="pericia for"><span class="nome">FORTITUDE (FOR)</span><input data-save></div>
+<div class="pericia for"><span class="nome">LUTA (FOR)</span><input data-save></div>
+<div class="pericia for"><span class="nome">ATLETISMO (FOR)</span><input data-save></div>
+<div class="pericia for"><span class="nome">ARREMESSO (FOR)</span><input data-save></div>
+<div class="pericia for"><span class="nome">TÁTICA (FOR)</span><input data-save></div>
 </div>
 
 <div>
-<div class="pericia agi">CORTE (AGI)<input data-save></div>
-<div class="pericia agi">ACROBACIA (AGI)<input data-save></div>
-<div class="pericia agi">PONTARIA (AGI)<input data-save></div>
-<div class="pericia agi">SOBREVIVÊNCIA (AGI)<input data-save></div>
-<div class="pericia agi">REFLEXO (AGI)<input data-save></div>
-<div class="pericia agi">FURTIVIDADE (AGI)<input data-save></div>
+<div class="pericia agi"><span class="nome">CORTE (AGI)</span><input data-save></div>
+<div class="pericia agi"><span class="nome">ACROBACIA (AGI)</span><input data-save></div>
+<div class="pericia agi"><span class="nome">PONTARIA (AGI)</span><input data-save></div>
+<div class="pericia agi"><span class="nome">SOBREVIVÊNCIA (AGI)</span><input data-save></div>
+<div class="pericia agi"><span class="nome">REFLEXO (AGI)</span><input data-save></div>
+<div class="pericia agi"><span class="nome">FURTIVIDADE (AGI)</span><input data-save></div>
 </div>
 </div>
 
 <!-- PRE | INT -->
 <div class="pericias-row">
 <div>
-<div class="pericia pre">VONTADE (PRE)<input data-save></div>
-<div class="pericia pre">ADESTRAMENTO (PRE)<input data-save></div>
-<div class="pericia pre">INTIMIDAÇÃO (PRE)<input data-save></div>
-<div class="pericia pre">PERSUASÃO (PRE)<input data-save></div>
+<div class="pericia pre"><span class="nome">VONTADE (PRE)</span><input data-save></div>
+<div class="pericia pre"><span class="nome">ADESTRAMENTO (PRE)</span><input data-save></div>
+<div class="pericia pre"><span class="nome">INTIMIDAÇÃO (PRE)</span><input data-save></div>
+<div class="pericia pre"><span class="nome">PERSUASÃO (PRE)</span><input data-save></div>
 </div>
 
 <div>
-<div class="pericia int">ARTES (INT)<input data-save></div>
-<div class="pericia int">CIÊNCIAS (INT)<input data-save></div>
-<div class="pericia int">PERCEPÇÃO (INT)<input data-save></div>
-<div class="pericia int">RITUAL (INT)<input data-save></div>
-<div class="pericia int">OCULTISMO (INT)<input data-save></div>
-<div class="pericia int">RELIGIÃO (INT)<input data-save></div>
-<div class="pericia int">PESQUISA (INT)<input data-save></div>
-<div class="pericia int">MEDICINA (INT)<input data-save></div>
-<div class="pericia int">DIREÇÃO (INT)<input data-save></div>
-<div class="pericia int">ATUALIDADES (INT)<input data-save></div>
+<div class="pericia int"><span class="nome">ARTES (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">CIÊNCIAS (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">PERCEPÇÃO (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">RITUAL (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">OCULTISMO (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">RELIGIÃO (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">PESQUISA (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">MEDICINA (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">DIREÇÃO (INT)</span><input data-save></div>
+<div class="pericia int"><span class="nome">ATUALIDADES (INT)</span><input data-save></div>
 </div>
 </div>
 
@@ -228,7 +244,11 @@ const bars=document.getElementById("bars");
 inputs.forEach((el,i)=>{
  const k="ficha_"+i;
  el.value=localStorage.getItem(k)||"";
- el.oninput=()=>{localStorage.setItem(k,el.value);renderBars();}
+ el.oninput=()=>{
+    localStorage.setItem(k,el.value);
+    renderBars();
+    aplicarDesvantagem();
+ }
 });
 
 function renderBars(){
@@ -241,8 +261,45 @@ function renderBars(){
   bars.appendChild(b);
  });
 }
+
+// Função para aplicar Desvantagem
+function aplicarDesvantagem(){
+ const forValue = Number(document.querySelector(".stat.for input").value) || 0;
+ const agiValue = Number(document.querySelector(".stat.agi input").value) || 0;
+ const intValue = Number(document.querySelector(".stat.int input").value) || 0;
+ const preValue = Number(document.querySelector(".stat.pre input").value) || 0;
+ const peValue = Number(document.querySelector(".stat.pe input").value) || 0;
+
+ const pericias = document.querySelectorAll(".pericia");
+ pericias.forEach(p=>{
+    // Remove desvantagem anterior
+    p.querySelectorAll(".desvantagem").forEach(d=>d.remove());
+
+    // Se PE = 0, todas perícias recebem Desvantagem
+    if(peValue===0){
+        let span = document.createElement("span");
+        span.className="desvantagem";
+        span.textContent="Desvantagem";
+        p.insertBefore(span, p.querySelector("input"));
+    } else {
+        if((p.classList.contains("for") && forValue===0) ||
+           (p.classList.contains("agi") && agiValue===0) ||
+           (p.classList.contains("int") && intValue===0) ||
+           (p.classList.contains("pre") && preValue===0)){
+            let span = document.createElement("span");
+            span.className="desvantagem";
+            span.textContent="Desvantagem";
+            p.insertBefore(span, p.querySelector("input"));
+        }
+    }
+});
+}
+
 renderBars();
+aplicarDesvantagem();
 </script>
 
 </body>
 </html>
+
+
