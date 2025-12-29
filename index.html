@@ -122,6 +122,29 @@ input, textarea{
 textarea{
     min-height:140px;
 }
+
+/* Defesas estilo status */
+.defesas-grid{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:15px;
+}
+
+.defesa{
+    text-align:center;
+}
+
+.defesa input{
+    width:70px;
+    text-align:center;
+}
+
+.def-forca{color:#ffb84b;}
+.def-aguia{color:#4bff9a;}
+.def-fogo{color:#ff7f50;}
+.def-oculto{color:#c78cff;}
+.def-ritual{color:#4bffef;}
+.def-perf{color:#ffffff;}
 </style>
 </head>
 
@@ -167,17 +190,19 @@ textarea{
 
 <div class="section">
 <h2>Defesas</h2>
-<div class="inline">
-<label>Impacto <input data-save></label>
-<label>Queimadura <input data-save></label>
-</div>
-<div class="inline">
-<label>Perfuração <input data-save></label>
-<label>Ocultismo <input data-save></label>
-</div>
-<div class="inline">
-<label>Corte <input data-save></label>
-<label>Ritual <input data-save></label>
+<div class="defesas-grid">
+  <!-- Esquerda -->
+  <div>
+    <div class="defesa def-forca">👊 Impacto<br><input type="number" min="0" max="999" data-save></div>
+    <div class="defesa def-perf">🏹 Perfuração<br><input type="number" min="0" max="999" data-save></div>
+    <div class="defesa def-aguia">⚔️ Corte<br><input type="number" min="0" max="999" data-save></div>
+  </div>
+  <!-- Direita -->
+  <div>
+    <div class="defesa def-fogo">🔥 Queimadura<br><input type="number" min="0" max="999" data-save></div>
+    <div class="defesa def-oculto">👁️ Ocultismo<br><input type="number" min="0" max="999" data-save></div>
+    <div class="defesa def-ritual">🌳 Ritual<br><input type="number" min="0" max="999" data-save></div>
+  </div>
 </div>
 </div>
 
@@ -301,5 +326,3 @@ aplicarDesvantagem();
 
 </body>
 </html>
-
-
