@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>FICHA DE PERSONAGEM — ARQUIVO CONFIDENCIAL</title>
+
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<style>
+body{
+    background:
+        radial-gradient(circle at top, #1a1f2e 0%, #0b0e16 55%, #05070c 100%);
+    color:#d8dcec;
+    font-family:'VT323', monospace;
+    margin:20px;
+    font-size:20px;
+}
+
+h1,h2{
+    color:#9da8ff;
+    border-bottom:2px solid #3c4270;
+    margin-top:30px;
+    text-shadow:0 0 6px rgba(120,130,255,.4);
+}
+
+.section{
+    background:linear-gradient(135deg,#0f1322,#0a0d18);
+    padding:15px;
+    border:2px solid #2f3563;
+    margin-bottom:20px;
+    box-shadow: inset 0 0 25px rgba(0,0,0,.9),
+                0 0 12px rgba(70,80,160,.25);
+}
+
+input, textarea{
+    background:#0a0e1b;
+    color:#e6ebff;
+    border:2px solid #3c4270;
+    padding:4px;
+    font-family:'VT323', monospace;
+    font-size:18px;
+    width:100%;
+}
+
+.inline{
+    display:flex;
+    gap:10px;
+}
+
+.status-grid{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:12px;
+}
+
+.stat{
+    text-align:center;
+}
+
+.stat input{
+    width:70px;
+    text-align:center;
+}
+
+/* CORES */
+.pv{color:#ff5b5b;}
+.pe{color:#4b86ff;}
+.for{color:#ffb84b;}
+.agi{color:#4bff9a;}
+.int{color:#ffffff;}
+.pre{color:#c78cff;}
+
+/* GRÁFICO */
+.bar{
+    height:14px;
+    background:#0a0d18;
+    border:1px solid #3c4270;
+    margin-bottom:6px;
+}
+.bar span{display:block;height:100%;}
+.bar-for span{background:#ffb84b;}
+.bar-agi span{background:#4bff9a;}
+.bar-int span{background:#ffffff;}
+.bar-pre span{background:#c78cff;}
+
+/* PERÍCIAS */
+.pericias-grid{
+    display:grid;
+    grid-template-rows:auto auto;
+    gap:25px;
+}
+
+.pericias-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.pericia{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px dotted #3c4270;
+}
+.pericia input{width:60px;text-align:center;}
+
+textarea{
+    min-height:140px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📁 FICHA DE PERSONAGEM — ACESSO RESTRITO</h1>
+
+<div class="section">
+<h2>Perfil</h2>
+<label>Nível <input data-save></label>
+<label>Ancestral <input data-save></label>
+<label>Profissão <input data-save></label>
+</div>
+
+<div class="section">
+<h2>Características</h2>
+<label>Nome <input data-save></label>
+<label>Idade <input data-save></label>
+<div class="inline">
+<label>Altura <input data-save></label>
+<label>Peso <input data-save></label>
+</div>
+<div class="inline">
+<label>Nacionalidade <input data-save></label>
+<label>Nascido <input data-save></label>
+</div>
+</div>
+
+<div class="section">
+<h2>Status</h2>
+<div class="status-grid">
+<div class="stat pv">PV<br><input type="number" data-save></div>
+<div class="stat for">FOR<br><input type="number" min="0" max="5" data-save data-bar="for"></div>
+<div class="stat int">INT<br><input type="number" min="0" max="5" data-save data-bar="int"></div>
+<div class="stat pe">PE<br><input type="number" data-save></div>
+<div class="stat agi">AGI<br><input type="number" min="0" max="5" data-save data-bar="agi"></div>
+<div class="stat pre">PRE<br><input type="number" min="0" max="5" data-save data-bar="pre"></div>
+</div>
+
+<h3>Distribuição de Atributos</h3>
+<div id="bars"></div>
+</div>
+
+<div class="section">
+<h2>Defesas</h2>
+<div class="inline">
+<label>Impacto <input data-save></label>
+<label>Queimadura <input data-save></label>
+</div>
+<div class="inline">
+<label>Perfuração <input data-save></label>
+<label>Ocultismo <input data-save></label>
+</div>
+<div class="inline">
+<label>Corte <input data-save></label>
+<label>Ritual <input data-save></label>
+</div>
+</div>
+
+<div class="section">
+<h2>Perícias</h2>
+
+<div class="pericias-grid">
+
+<!-- FOR | AGI -->
+<div class="pericias-row">
+<div>
+<div class="pericia for">FORTITUDE (FOR)<input data-save></div>
+<div class="pericia for">LUTA (FOR)<input data-save></div>
+<div class="pericia for">ATLETISMO (FOR)<input data-save></div>
+<div class="pericia for">ARREMESSO (FOR)<input data-save></div>
+<div class="pericia for">TÁTICA (FOR)<input data-save></div>
+</div>
+
+<div>
+<div class="pericia agi">CORTE (AGI)<input data-save></div>
+<div class="pericia agi">ACROBACIA (AGI)<input data-save></div>
+<div class="pericia agi">PONTARIA (AGI)<input data-save></div>
+<div class="pericia agi">SOBREVIVÊNCIA (AGI)<input data-save></div>
+<div class="pericia agi">REFLEXO (AGI)<input data-save></div>
+<div class="pericia agi">FURTIVIDADE (AGI)<input data-save></div>
+</div>
+</div>
+
+<!-- PRE | INT -->
+<div class="pericias-row">
+<div>
+<div class="pericia pre">VONTADE (PRE)<input data-save></div>
+<div class="pericia pre">ADESTRAMENTO (PRE)<input data-save></div>
+<div class="pericia pre">INTIMIDAÇÃO (PRE)<input data-save></div>
+<div class="pericia pre">PERSUASÃO (PRE)<input data-save></div>
+</div>
+
+<div>
+<div class="pericia int">ARTES (INT)<input data-save></div>
+<div class="pericia int">CIÊNCIAS (INT)<input data-save></div>
+<div class="pericia int">PERCEPÇÃO (INT)<input data-save></div>
+<div class="pericia int">RITUAL (INT)<input data-save></div>
+<div class="pericia int">OCULTISMO (INT)<input data-save></div>
+<div class="pericia int">RELIGIÃO (INT)<input data-save></div>
+<div class="pericia int">PESQUISA (INT)<input data-save></div>
+<div class="pericia int">MEDICINA (INT)<input data-save></div>
+<div class="pericia int">DIREÇÃO (INT)<input data-save></div>
+<div class="pericia int">ATUALIDADES (INT)<input data-save></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="section">
+<h2>Inventário</h2>
+<textarea data-save></textarea>
+</div>
+
+<script>
+const inputs=document.querySelectorAll("[data-save]");
+const bars=document.getElementById("bars");
+
+inputs.forEach((el,i)=>{
+ const k="ficha_"+i;
+ el.value=localStorage.getItem(k)||"";
+ el.oninput=()=>{localStorage.setItem(k,el.value);renderBars();}
+});
+
+function renderBars(){
+ bars.innerHTML="";
+ document.querySelectorAll("[data-bar]").forEach(el=>{
+  let v=Math.min(5,Math.max(0,el.value||0));
+  let b=document.createElement("div");
+  b.className="bar bar-"+el.dataset.bar;
+  b.innerHTML=`<span style="width:${v*20}%"></span>`;
+  bars.appendChild(b);
+ });
+}
+renderBars();
+</script>
+
+</body>
+</html>
