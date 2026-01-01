@@ -112,7 +112,6 @@ input, textarea{
     text-align:center;
 }
 
-/* Desvantagem em vermelho no meio */
 .desvantagem{
     color:#ff4b4b;
     font-weight:bold;
@@ -123,7 +122,6 @@ textarea{
     min-height:140px;
 }
 
-/* Defesas estilo status */
 .defesas-grid{
     display:grid;
     grid-template-columns: repeat(2,1fr);
@@ -177,11 +175,11 @@ textarea{
 <h2>Status</h2>
 <div class="status-grid">
   <div class="stat pv">❤️ PV<br><input type="number" min="0" max="999" data-save></div>
-  <div class="stat for">💪 FOR<br><input type="number" min="0" max="5" data-save data-bar="for"></div>
-  <div class="stat int">🧠 INT<br><input type="number" min="0" max="5" data-save data-bar="int"></div>
-  <div class="stat pe">🔋 PE<br><input type="number" min="0" max="999" data-save></div>
-  <div class="stat agi">🏃 AGI<br><input type="number" min="0" max="5" data-save data-bar="agi"></div>
-  <div class="stat pre">🎯 PRE<br><input type="number" min="0" max="5" data-save data-bar="pre"></div>
+  <div class="stat for">💪 FOR<br><input type="number" id="attr-for" min="0" max="5" data-save data-bar="for"></div>
+  <div class="stat int">🧠 INT<br><input type="number" id="attr-int" min="0" max="5" data-save data-bar="int"></div>
+  <div class="stat pe">🔋 PE<br><input type="number" id="input-pe" min="0" max="999" data-save></div>
+  <div class="stat agi">🏃 AGI<br><input type="number" id="attr-agi" min="0" max="5" data-save data-bar="agi"></div>
+  <div class="stat pre">🎯 PRE<br><input type="number" id="attr-pre" min="0" max="5" data-save data-bar="pre"></div>
 </div>
 
 <h3>Distribuição de Atributos</h3>
@@ -191,17 +189,15 @@ textarea{
 <div class="section">
 <h2>Defesas</h2>
 <div class="defesas-grid">
-  <!-- Esquerda -->
   <div>
-    <div class="defesa def-forca">👊 Impacto<br><input type="number" min="0" max="999" data-save></div>
-    <div class="defesa def-perf">🏹 Perfuração<br><input type="number" min="0" max="999" data-save></div>
-    <div class="defesa def-aguia">⚔️ Corte<br><input type="number" min="0" max="999" data-save></div>
+    <div class="defesa def-forca">👊 Impacto<br><input type="number" id="def-impacto" min="0" max="20" data-save></div>
+    <div class="defesa def-perf">🏹 Perfuração<br><input type="number" id="def-perfuracao" min="0" max="20" data-save></div>
+    <div class="defesa def-aguia">⚔️ Corte<br><input type="number" id="def-corte" min="0" max="20" data-save></div>
   </div>
-  <!-- Direita -->
   <div>
-    <div class="defesa def-fogo">🔥 Queimadura<br><input type="number" min="0" max="999" data-save></div>
-    <div class="defesa def-oculto">👁️ Ocultismo<br><input type="number" min="0" max="999" data-save></div>
-    <div class="defesa def-ritual">🌳 Ritual<br><input type="number" min="0" max="999" data-save></div>
+    <div class="defesa def-fogo">🔥 Queimadura<br><input type="number" id="def-queimadura" min="0" max="20" data-save></div>
+    <div class="defesa def-oculto">👁️ Ocultismo<br><input type="number" id="def-ocultismo" min="0" max="20" data-save></div>
+    <div class="defesa def-ritual">🌳 Ritual<br><input type="number" id="def-ritual" min="0" max="20" data-save></div>
   </div>
 </div>
 </div>
@@ -210,8 +206,6 @@ textarea{
 <h2>Perícias</h2>
 
 <div class="pericias-grid">
-
-<!-- FOR | AGI -->
 <div class="pericias-row">
 <div>
 <div class="pericia for"><span class="nome">FORTITUDE (FOR)</span><input data-save></div>
@@ -231,7 +225,6 @@ textarea{
 </div>
 </div>
 
-<!-- PRE | INT -->
 <div class="pericias-row">
 <div>
 <div class="pericia pre"><span class="nome">VONTADE (PRE)</span><input data-save></div>
@@ -253,7 +246,6 @@ textarea{
 <div class="pericia int"><span class="nome">ATUALIDADES (INT)</span><input data-save></div>
 </div>
 </div>
-
 </div>
 </div>
 
@@ -263,61 +255,95 @@ textarea{
 </div>
 
 <script>
-const inputs=document.querySelectorAll("[data-save]");
-const bars=document.getElementById("bars");
+const inputs = document.querySelectorAll("[data-save]");
+const bars = document.getElementById("bars");
 
-inputs.forEach((el,i)=>{
- const k="ficha_"+i;
- el.value=localStorage.getItem(k)||"";
- el.oninput=()=>{
-    localStorage.setItem(k,el.value);
-    renderBars();
-    aplicarDesvantagem();
- }
+let valoresAntigos = {
+    "attr-for": 0,
+    "attr-agi": 0,
+    "attr-int": 0
+};
+
+inputs.forEach((el, i) => {
+    const k = "ficha_" + i;
+    const savedValue = localStorage.getItem(k);
+    if (savedValue !== null) el.value = savedValue;
+
+    if (valoresAntigos.hasOwnProperty(el.id)) {
+        valoresAntigos[el.id] = Number(el.value) || 0;
+    }
+
+    el.oninput = () => {
+        if (valoresAntigos.hasOwnProperty(el.id)) {
+            const novoValor = Number(el.value) || 0;
+            const diff = novoValor - valoresAntigos[el.id];
+            
+            if (diff !== 0) {
+                aplicarBonusDefesa(el.id, diff);
+                valoresAntigos[el.id] = novoValor;
+            }
+        }
+
+        localStorage.setItem(k, el.value);
+        renderBars();
+        aplicarDesvantagem();
+    };
 });
 
-function renderBars(){
- bars.innerHTML="";
- document.querySelectorAll("[data-bar]").forEach(el=>{
-  let v=Math.min(5,Math.max(0,el.value||0));
-  let b=document.createElement("div");
-  b.className="bar bar-"+el.dataset.bar;
-  b.innerHTML=`<span style="width:${v*20}%"></span>`;
-  bars.appendChild(b);
- });
+function aplicarBonusDefesa(attrId, diff) {
+    let defsAfetadas = [];
+    if (attrId === "attr-for") defsAfetadas = ["def-impacto", "def-perfuracao"];
+    if (attrId === "attr-agi") defsAfetadas = ["def-corte", "def-queimadura"];
+    if (attrId === "attr-int") defsAfetadas = ["def-ocultismo", "def-ritual"];
+
+    defsAfetadas.forEach(defId => {
+        const inputDef = document.getElementById(defId);
+        let valorAtual = Number(inputDef.value) || 0;
+        let novoValor = valorAtual + diff;
+        
+        novoValor = Math.min(20, Math.max(0, novoValor));
+        inputDef.value = novoValor;
+
+        inputs.forEach((input, index) => {
+            if (input.id === defId) {
+                localStorage.setItem("ficha_" + index, novoValor);
+            }
+        });
+    });
 }
 
-// Função para aplicar Desvantagem
-function aplicarDesvantagem(){
- const forValue = Number(document.querySelector(".stat.for input").value) || 0;
- const agiValue = Number(document.querySelector(".stat.agi input").value) || 0;
- const intValue = Number(document.querySelector(".stat.int input").value) || 0;
- const preValue = Number(document.querySelector(".stat.pre input").value) || 0;
- const peValue = Number(document.querySelector(".stat.pe input").value) || 0;
+function renderBars() {
+    bars.innerHTML = "";
+    document.querySelectorAll("[data-bar]").forEach(el => {
+        let v = Math.min(5, Math.max(0, el.value || 0));
+        let b = document.createElement("div");
+        b.className = "bar bar-" + el.dataset.bar;
+        b.innerHTML = `<span style="width:${v * 20}%"></span>`;
+        bars.appendChild(b);
+    });
+}
 
- const pericias = document.querySelectorAll(".pericia");
- pericias.forEach(p=>{
-    // Remove desvantagem anterior
-    p.querySelectorAll(".desvantagem").forEach(d=>d.remove());
+function aplicarDesvantagem() {
+    const forValue = Number(document.getElementById("attr-for").value) || 0;
+    const agiValue = Number(document.getElementById("attr-agi").value) || 0;
+    const intValue = Number(document.getElementById("attr-int").value) || 0;
+    const preValue = Number(document.getElementById("attr-pre").value) || 0;
+    const peValue = Number(document.getElementById("input-pe").value) || 0;
 
-    // Se PE = 0, todas perícias recebem Desvantagem
-    if(peValue===0){
-        let span = document.createElement("span");
-        span.className="desvantagem";
-        span.textContent="Desvantagem";
-        p.insertBefore(span, p.querySelector("input"));
-    } else {
-        if((p.classList.contains("for") && forValue===0) ||
-           (p.classList.contains("agi") && agiValue===0) ||
-           (p.classList.contains("int") && intValue===0) ||
-           (p.classList.contains("pre") && preValue===0)){
+    const pericias = document.querySelectorAll(".pericia");
+    pericias.forEach(p => {
+        p.querySelectorAll(".desvantagem").forEach(d => d.remove());
+        if (peValue === 0 || 
+           (p.classList.contains("for") && forValue === 0) ||
+           (p.classList.contains("agi") && agiValue === 0) ||
+           (p.classList.contains("int") && intValue === 0) ||
+           (p.classList.contains("pre") && preValue === 0)) {
             let span = document.createElement("span");
-            span.className="desvantagem";
-            span.textContent="Desvantagem";
+            span.className = "desvantagem";
+            span.textContent = "Desvantagem";
             p.insertBefore(span, p.querySelector("input"));
         }
-    }
-});
+    });
 }
 
 renderBars();
