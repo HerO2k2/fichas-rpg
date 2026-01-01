@@ -8,8 +8,7 @@
 
 <style>
 body{
-    background:
-        radial-gradient(circle at top, #1a1f2e 0%, #0b0e16 55%, #05070c 100%);
+    background: radial-gradient(circle at top, #1a1f2e 0%, #0b0e16 55%, #05070c 100%);
     color:#d8dcec;
     font-family:'VT323', monospace;
     margin:20px;
@@ -28,8 +27,7 @@ h1,h2{
     padding:15px;
     border:2px solid #2f3563;
     margin-bottom:20px;
-    box-shadow: inset 0 0 25px rgba(0,0,0,.9),
-                0 0 12px rgba(70,80,160,.25);
+    box-shadow: inset 0 0 25px rgba(0,0,0,.9), 0 0 12px rgba(70,80,160,.25);
 }
 
 input, textarea{
@@ -44,100 +42,62 @@ input, textarea{
 .inline{
     display:flex;
     gap:10px;
+    margin-bottom: 5px;
 }
 
 .status-grid{
     display:grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: 1fr 1fr 1fr;
     gap:12px;
+    align-items: start;
 }
 
-.stat{
-    text-align:center;
+.stat{ text-align:center; margin-bottom: 15px; }
+.stat input{ width:45px; text-align:center; }
+
+.fraction-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-size: 22px;
 }
 
-.stat input{
-    width:70px;
-    text-align:center;
-}
-
-/* CORES */
+/* CORES PERSONALIZADAS */
 .pv{color:#ff5b5b;}
-.pe{color:#4b86ff;}
-.for{color:#ffb84b;}
+.es{color:#4b86ff;} /* Azul */
+.pe{color:#2e7d32;} /* Verde Escuro */
+.for{color:#ff8c00;} /* Laranja */
 .agi{color:#4bff9a;}
-.int{color:#ffffff;}
+.int{color:#80d8ff;} /* Azul Claro */
 .pre{color:#c78cff;}
 
-/* GRÁFICO */
-.bar{
-    height:14px;
-    background:#0a0d18;
-    border:1px solid #3c4270;
-    margin-bottom:6px;
-}
-.bar span{display:block;height:100%;width:0;}
-.bar-for span{background:#ffb84b;}
-.bar-agi span{background:#4bff9a;}
-.bar-int span{background:#ffffff;}
-.bar-pre span{background:#c78cff;}
+/* BARRAS */
+.bar{ height:14px; background:#0a0d18; border:1px solid #3c4270; margin-bottom:6px; }
+.bar span{ display:block; height:100%; width:0; }
+.bar-for span{ background:#ff8c00; }
+.bar-agi span{ background:#4bff9a; }
+.bar-int span{ background:#80d8ff; }
+.bar-pre span{ background:#c78cff; }
 
 /* PERÍCIAS */
-.pericias-grid{
-    display:grid;
-    grid-template-rows:auto auto;
-    gap:25px;
-}
-
-.pericias-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:30px;
-}
-
+.pericias-grid{ display:grid; gap:25px; }
+.pericias-row{ display:grid; grid-template-columns:1fr 1fr; gap:30px; }
 .pericia{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px dotted #3c4270;
-    gap:8px;
+    display:flex; justify-content:space-between; align-items:center;
+    border-bottom:1px dotted #3c4270; gap:8px;
 }
+.pericia .nome{ flex:1; }
+.pericia input{ width:60px; text-align:center; }
 
-.pericia .nome{
-    flex:1;
-}
+.desvantagem{ color:#ff4b4b; font-weight:bold; white-space: nowrap; }
+textarea{ width: 100%; min-height:140px; box-sizing: border-box; }
 
-.pericia input{
-    width:60px;
-    text-align:center;
-}
+.defesas-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:15px; }
+.defesa{ text-align:center; }
+.defesa input{ width:70px; text-align:center; }
 
-.desvantagem{
-    color:#ff4b4b;
-    font-weight:bold;
-    white-space: nowrap;
-}
-
-textarea{
-    min-height:140px;
-}
-
-.defesas-grid{
-    display:grid;
-    grid-template-columns: repeat(2,1fr);
-    gap:15px;
-}
-
-.defesa{
-    text-align:center;
-}
-
-.defesa input{
-    width:70px;
-    text-align:center;
-}
-
-.def-forca{color:#ffb84b;}
+.def-forca{color:#ff8c00;}
 .def-aguia{color:#4bff9a;}
 .def-fogo{color:#ff7f50;}
 .def-oculto{color:#c78cff;}
@@ -151,35 +111,61 @@ textarea{
 <h1>📁 FICHA DE PERSONAGEM — ACESSO RESTRITO</h1>
 
 <div class="section">
-<h2>Perfil</h2>
-<label>Nível <input data-save></label>
-<label>Ancestral <input data-save></label>
-<label>Profissão <input data-save></label>
+    <h2>Perfil</h2>
+    <label>Nível <input data-save></label>
+    <label>Ancestral <input data-save></label>
+    <label>Profissão <input data-save></label>
 </div>
 
 <div class="section">
-<h2>Características</h2>
-<label>Nome <input data-save></label>
-<label>Idade <input data-save></label>
-<div class="inline">
-<label>Altura <input data-save></label>
-<label>Peso <input data-save></label>
-</div>
-<div class="inline">
-<label>Nacionalidade <input data-save></label>
-<label>Nascido <input data-save></label>
-</div>
+    <h2>Características</h2>
+    <div class="inline">
+        <label>Nome <input data-save></label>
+        <label>Idade <input data-save></label>
+    </div>
+    <div class="inline">
+        <label>Altura <input data-save></label>
+        <label>Peso <input data-save></label>
+    </div>
+    <div class="inline">
+        <label>Nacionalidade <input data-save></label>
+        <label>Nascido <input data-save></label>
+    </div>
 </div>
 
 <div class="section">
 <h2>Status</h2>
 <div class="status-grid">
-  <div class="stat pv">❤️ PV<br><input type="number" min="0" max="999" data-save></div>
-  <div class="stat for">💪 FOR<br><input type="number" id="attr-for" min="0" max="5" data-save data-bar="for"></div>
-  <div class="stat int">🧠 INT<br><input type="number" id="attr-int" min="0" max="5" data-save data-bar="int"></div>
-  <div class="stat pe">🔋 PE<br><input type="number" id="input-pe" min="0" max="999" data-save></div>
-  <div class="stat agi">🏃 AGI<br><input type="number" id="attr-agi" min="0" max="5" data-save data-bar="agi"></div>
-  <div class="stat pre">🎯 PRE<br><input type="number" id="attr-pre" min="0" max="5" data-save data-bar="pre"></div>
+  <div>
+    <div class="stat pv">❤️ PV<br>
+        <div class="fraction-container">
+            <input type="number" min="0" max="999" data-save class="cur-val">/
+            <input type="number" min="0" max="999" data-save class="max-val">
+        </div>
+    </div>
+    <div class="stat es">🛡️ ES<br>
+        <div class="fraction-container">
+            <input type="number" min="0" max="999" data-save class="cur-val">/
+            <input type="number" min="0" max="999" data-save class="max-val">
+        </div>
+    </div>
+    <div class="stat pe">🔋 PE<br>
+        <div class="fraction-container">
+            <input type="number" id="input-pe-cur" min="0" max="999" data-save class="cur-val">/
+            <input type="number" id="input-pe-max" min="0" max="999" data-save class="max-val">
+        </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="stat for">💪 FOR<br><input type="number" id="attr-for" min="0" max="5" data-save data-bar="for"></div>
+    <div class="stat agi">🏃 AGI<br><input type="number" id="attr-agi" min="0" max="5" data-save data-bar="agi"></div>
+  </div>
+
+  <div>
+    <div class="stat int">🧠 INT<br><input type="number" id="attr-int" min="0" max="5" data-save data-bar="int"></div>
+    <div class="stat pre">🎯 PRE<br><input type="number" id="attr-pre" min="0" max="5" data-save data-bar="pre"></div>
+  </div>
 </div>
 
 <h3>Distribuição de Atributos</h3>
@@ -204,65 +190,57 @@ textarea{
 
 <div class="section">
 <h2>Perícias</h2>
-
 <div class="pericias-grid">
 <div class="pericias-row">
-<div>
-<div class="pericia for"><span class="nome">FORTITUDE (FOR)</span><input data-save></div>
-<div class="pericia for"><span class="nome">LUTA (FOR)</span><input data-save></div>
-<div class="pericia for"><span class="nome">ATLETISMO (FOR)</span><input data-save></div>
-<div class="pericia for"><span class="nome">ARREMESSO (FOR)</span><input data-save></div>
-<div class="pericia for"><span class="nome">TÁTICA (FOR)</span><input data-save></div>
+    <div>
+        <div class="pericia for"><span class="nome">FORTITUDE (FOR)</span><input data-save></div>
+        <div class="pericia for"><span class="nome">LUTA (FOR)</span><input data-save></div>
+        <div class="pericia for"><span class="nome">ATLETISMO (FOR)</span><input data-save></div>
+        <div class="pericia for"><span class="nome">ARREMESSO (FOR)</span><input data-save></div>
+        <div class="pericia for"><span class="nome">TÁTICA (FOR)</span><input data-save></div>
+    </div>
+    <div>
+        <div class="pericia agi"><span class="nome">CORTE (AGI)</span><input data-save></div>
+        <div class="pericia agi"><span class="nome">ACROBACIA (AGI)</span><input data-save></div>
+        <div class="pericia agi"><span class="nome">PONTARIA (AGI)</span><input data-save></div>
+        <div class="pericia agi"><span class="nome">SOBREVIVÊNCIA (AGI)</span><input data-save></div>
+        <div class="pericia agi"><span class="nome">REFLEXO (AGI)</span><input data-save></div>
+        <div class="pericia agi"><span class="nome">FURTIVIDADE (AGI)</span><input data-save></div>
+    </div>
 </div>
-
-<div>
-<div class="pericia agi"><span class="nome">CORTE (AGI)</span><input data-save></div>
-<div class="pericia agi"><span class="nome">ACROBACIA (AGI)</span><input data-save></div>
-<div class="pericia agi"><span class="nome">PONTARIA (AGI)</span><input data-save></div>
-<div class="pericia agi"><span class="nome">SOBREVIVÊNCIA (AGI)</span><input data-save></div>
-<div class="pericia agi"><span class="nome">REFLEXO (AGI)</span><input data-save></div>
-<div class="pericia agi"><span class="nome">FURTIVIDADE (AGI)</span><input data-save></div>
-</div>
-</div>
-
 <div class="pericias-row">
-<div>
-<div class="pericia pre"><span class="nome">VONTADE (PRE)</span><input data-save></div>
-<div class="pericia pre"><span class="nome">ADESTRAMENTO (PRE)</span><input data-save></div>
-<div class="pericia pre"><span class="nome">INTIMIDAÇÃO (PRE)</span><input data-save></div>
-<div class="pericia pre"><span class="nome">PERSUASÃO (PRE)</span><input data-save></div>
-</div>
-
-<div>
-<div class="pericia int"><span class="nome">ARTES (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">CIÊNCIAS (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">PERCEPÇÃO (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">RITUAL (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">OCULTISMO (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">RELIGIÃO (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">PESQUISA (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">MEDICINA (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">DIREÇÃO (INT)</span><input data-save></div>
-<div class="pericia int"><span class="nome">ATUALIDADES (INT)</span><input data-save></div>
-</div>
+    <div>
+        <div class="pericia pre"><span class="nome">VONTADE (PRE)</span><input data-save></div>
+        <div class="pericia pre"><span class="nome">ADESTRAMENTO (PRE)</span><input data-save></div>
+        <div class="pericia pre"><span class="nome">INTIMIDAÇÃO (PRE)</span><input data-save></div>
+        <div class="pericia pre"><span class="nome">PERSUASÃO (PRE)</span><input data-save></div>
+    </div>
+    <div>
+        <div class="pericia int"><span class="nome">ARTES (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">CIÊNCIAS (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">PERCEPÇÃO (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">RITUAL (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">OCULTISMO (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">RELIGIÃO (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">PESQUISA (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">MEDICINA (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">DIREÇÃO (INT)</span><input data-save></div>
+        <div class="pericia int"><span class="nome">ATUALIDADES (INT)</span><input data-save></div>
+    </div>
 </div>
 </div>
 </div>
 
 <div class="section">
-<h2>Inventário</h2>
-<textarea data-save></textarea>
+    <h2>Inventário</h2>
+    <textarea data-save placeholder="Descreva seus itens aqui..."></textarea>
 </div>
 
 <script>
 const inputs = document.querySelectorAll("[data-save]");
 const bars = document.getElementById("bars");
 
-let valoresAntigos = {
-    "attr-for": 0,
-    "attr-agi": 0,
-    "attr-int": 0
-};
+let valoresAntigos = { "attr-for": 0, "attr-agi": 0, "attr-int": 0 };
 
 inputs.forEach((el, i) => {
     const k = "ficha_" + i;
@@ -274,10 +252,17 @@ inputs.forEach((el, i) => {
     }
 
     el.oninput = () => {
+        // Trava Atual <= Máximo
+        if (el.classList.contains("cur-val")) {
+            const container = el.closest('.fraction-container');
+            const maxVal = Number(container.querySelector('.max-val').value) || 0;
+            if (Number(el.value) > maxVal) el.value = maxVal;
+        }
+
+        // Bônus de Defesa
         if (valoresAntigos.hasOwnProperty(el.id)) {
             const novoValor = Number(el.value) || 0;
             const diff = novoValor - valoresAntigos[el.id];
-            
             if (diff !== 0) {
                 aplicarBonusDefesa(el.id, diff);
                 valoresAntigos[el.id] = novoValor;
@@ -291,24 +276,18 @@ inputs.forEach((el, i) => {
 });
 
 function aplicarBonusDefesa(attrId, diff) {
-    let defsAfetadas = [];
-    if (attrId === "attr-for") defsAfetadas = ["def-impacto", "def-perfuracao"];
-    if (attrId === "attr-agi") defsAfetadas = ["def-corte", "def-queimadura"];
-    if (attrId === "attr-int") defsAfetadas = ["def-ocultismo", "def-ritual"];
+    let defs = [];
+    if (attrId === "attr-for") defs = ["def-impacto", "def-perfuracao"];
+    if (attrId === "attr-agi") defs = ["def-corte", "def-queimadura"];
+    if (attrId === "attr-int") defs = ["def-ocultismo", "def-ritual"];
 
-    defsAfetadas.forEach(defId => {
-        const inputDef = document.getElementById(defId);
-        let valorAtual = Number(inputDef.value) || 0;
-        let novoValor = valorAtual + diff;
-        
-        novoValor = Math.min(20, Math.max(0, novoValor));
-        inputDef.value = novoValor;
-
-        inputs.forEach((input, index) => {
-            if (input.id === defId) {
-                localStorage.setItem("ficha_" + index, novoValor);
-            }
-        });
+    defs.forEach(id => {
+        const inputDef = document.getElementById(id);
+        if (!inputDef) return;
+        let novo = Math.min(20, Math.max(0, (Number(inputDef.value) || 0) + diff));
+        inputDef.value = novo;
+        // Salva o estado da defesa alterada
+        inputs.forEach((inp, idx) => { if(inp.id === id) localStorage.setItem("ficha_"+idx, novo); });
     });
 }
 
@@ -324,24 +303,20 @@ function renderBars() {
 }
 
 function aplicarDesvantagem() {
-    const forValue = Number(document.getElementById("attr-for").value) || 0;
-    const agiValue = Number(document.getElementById("attr-agi").value) || 0;
-    const intValue = Number(document.getElementById("attr-int").value) || 0;
-    const preValue = Number(document.getElementById("attr-pre").value) || 0;
-    const peValue = Number(document.getElementById("input-pe").value) || 0;
+    const vals = {
+        for: Number(document.getElementById("attr-for").value) || 0,
+        agi: Number(document.getElementById("attr-agi").value) || 0,
+        int: Number(document.getElementById("attr-int").value) || 0,
+        pre: Number(document.getElementById("attr-pre").value) || 0,
+        pe: Number(document.getElementById("input-pe-cur").value) || 0
+    };
 
-    const pericias = document.querySelectorAll(".pericia");
-    pericias.forEach(p => {
+    document.querySelectorAll(".pericia").forEach(p => {
         p.querySelectorAll(".desvantagem").forEach(d => d.remove());
-        if (peValue === 0 || 
-           (p.classList.contains("for") && forValue === 0) ||
-           (p.classList.contains("agi") && agiValue === 0) ||
-           (p.classList.contains("int") && intValue === 0) ||
-           (p.classList.contains("pre") && preValue === 0)) {
-            let span = document.createElement("span");
-            span.className = "desvantagem";
-            span.textContent = "Desvantagem";
-            p.insertBefore(span, p.querySelector("input"));
+        let m = p.classList;
+        if (vals.pe === 0 || (m.contains("for") && vals.for === 0) || (m.contains("agi") && vals.agi === 0) || (m.contains("int") && vals.int === 0) || (m.contains("pre") && vals.pre === 0)) {
+            let s = document.createElement("span"); s.className = "desvantagem"; s.textContent = "Desvantagem";
+            p.insertBefore(s, p.querySelector("input"));
         }
     });
 }
@@ -349,6 +324,5 @@ function aplicarDesvantagem() {
 renderBars();
 aplicarDesvantagem();
 </script>
-
 </body>
 </html>
